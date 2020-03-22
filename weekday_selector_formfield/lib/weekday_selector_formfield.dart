@@ -26,7 +26,7 @@ class WeekDaySelectorFormField extends StatefulWidget {
       this.splashColor,
       this.borderSide = const BorderSide(color: Colors.black, width: 1),
       this.initialValue,
-      this.textStyle = const TextStyle(color: Colors.black),
+      this.textStyle = TextStyle(color: Colors.black),
       this.errorTextStyle = const TextStyle(color: Colors.red),
       this.axis = Axis.horizontal,
       this.crossAxisAlignment = WrapCrossAlignment.center,
