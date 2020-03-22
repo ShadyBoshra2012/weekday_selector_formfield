@@ -128,7 +128,33 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
       if (widget.onChange != null) {
         widget.onChange(daysSelected);
       }
-      setState(() {});
+      setState(() {
+        this.displayedDays.clear();
+        this.widget.displayDays.forEach((day) {
+          displayedDays.add(_DayItem(
+            borderSide: this.widget.borderSide,
+            onTap: _dayTap,
+            label: languages[day.index][widget.language],
+            value: day,
+            fillColor: widget.fillColor,
+            selectedFillColor: this.widget.selectedFillColor,
+            textStyle: this.widget.textStyle,
+            highlightColor: this.widget.highlightColor,
+            splashColor: this.widget.splashColor,
+            borderRadius: this.widget.borderRadius,
+            elevation: this.widget.elevation,
+            dayLong: this.widget.dayLong,
+            boxConstraints: widget.boxConstraints,
+            selected: widget.initialValue == null
+                ? false
+                : widget.initialValue
+                .firstWhere((d) => day == d, orElse: () => null) ==
+                null
+                ? false
+                : true,
+          ));
+        });
+      });
     } else {
       if (daysSelected.contains(day)) {
         daysSelected.remove(day);
