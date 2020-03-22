@@ -26,7 +26,7 @@ class WeekDaySelectorFormField extends StatefulWidget {
       this.splashColor,
       this.borderSide = const BorderSide(color: Colors.black, width: 1),
       this.initialValue,
-      this.textStyle = TextStyle(color: Colors.black),
+      this.textStyle = const TextStyle(color: Colors.black),
       this.errorTextStyle = const TextStyle(color: Colors.red),
       this.axis = Axis.horizontal,
       this.crossAxisAlignment = WrapCrossAlignment.center,
@@ -35,7 +35,8 @@ class WeekDaySelectorFormField extends StatefulWidget {
       this.elevation = 4.0,
       this.spacing = 5,
       this.runSpacing = 5,
-      this.dayLong = 3,
+        this.dayLong = 3,
+        this.singleDay = false,
       this.boxConstraints = const BoxConstraints(
           minWidth: 40, minHeight: 40, maxWidth: 40, maxHeight: 40)})
       : super(key: key);
@@ -63,6 +64,7 @@ class WeekDaySelectorFormField extends StatefulWidget {
   final double spacing;
   final WrapAlignment alignment;
   final int dayLong;
+  final bool singleDay;
   final BoxConstraints boxConstraints;
 
   static const workDays = [
@@ -121,13 +123,21 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
   }
 
   _dayTap(days day) {
-    if (daysSelected.contains(day)) {
-      daysSelected.remove(day);
+    if(this.widget.singleDay){
+        daysSelected.clear();
+        daysSelected.add(day);
+      if (widget.onChange != null) {
+        widget.onChange(daysSelected);
+      }
     } else {
-      daysSelected.add(day);
-    }
-    if (widget.onChange != null) {
-      widget.onChange(daysSelected);
+      if (daysSelected.contains(day)) {
+        daysSelected.remove(day);
+      } else {
+        daysSelected.add(day);
+      }
+      if (widget.onChange != null) {
+        widget.onChange(daysSelected);
+      }
     }
   }
 
