@@ -148,9 +148,11 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
       },
       builder: (state) {
         return Column(
+          textDirection: TextDirection.rtl,
           children: <Widget>[
             Container(
               child: Wrap(
+                textDirection: TextDirection.rtl,
                 children: displayedDays,
                 alignment: widget.alignment,
                 direction: widget.axis,
