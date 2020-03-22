@@ -128,9 +128,7 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
       if (widget.onChange != null) {
         widget.onChange(daysSelected);
       }
-      setState(() {
-        selected = !selected;
-      });
+      setState(() {});
     } else {
       if (daysSelected.contains(day)) {
         daysSelected.remove(day);
