@@ -253,13 +253,13 @@ class __DayItemState extends State<_DayItem> {
 }
 
 enum days { monday, tuesday, wednesday, thursday, friday, saturday, sunday }
-enum lang { en, es, pt }
+enum lang { en, es, pt, ar }
 const languages = [
-  {lang.en: 'Monday', lang.es: 'Lunes', lang.pt: 'Segunda'}, // monday
-  {lang.en: 'Tuesday', lang.es: 'Martes', lang.pt: 'Terça'}, // tuesday
-  {lang.en: 'Wednesday ', lang.es: 'Miercoles', lang.pt: 'Quarta'}, // wednesday
-  {lang.en: 'Thursday', lang.es: 'Jueves', lang.pt: 'Quinta'}, // thursday
-  {lang.en: 'Friday', lang.es: 'Viernes', lang.pt: 'Sexta'}, // friday
-  {lang.en: 'Saturday', lang.es: 'Sabado', lang.pt: 'Sabado'}, // thursday
-  {lang.en: 'Sunday', lang.es: 'Domingo', lang.pt: 'Domingo'} // saturday
+  {lang.en: 'Monday', lang.es: 'Lunes', lang.pt: 'Segunda', lang.ar: 'اثنين'}, // monday
+  {lang.en: 'Tuesday', lang.es: 'Martes', lang.pt: 'Terça', lang.ar: 'ثلاثاء'}, // tuesday
+  {lang.en: 'Wednesday ', lang.es: 'Miercoles', lang.pt: 'Quarta', lang.ar: 'اربع'}, // wednesday
+  {lang.en: 'Thursday', lang.es: 'Jueves', lang.pt: 'Quinta', lang.ar: 'خميس'}, // thursday
+  {lang.en: 'Friday', lang.es: 'Viernes', lang.pt: 'Sexta', lang.ar: 'جمعة'}, // friday
+  {lang.en: 'Saturday', lang.es: 'Sabado', lang.pt: 'Sabado', lang.ar: 'سبت'}, // thursday
+  {lang.en: 'Sunday', lang.es: 'Domingo', lang.pt: 'Domingo', lang.ar: 'احد'} // saturday
 ];
