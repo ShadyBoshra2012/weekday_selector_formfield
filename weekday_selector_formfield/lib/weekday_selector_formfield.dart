@@ -3,41 +3,42 @@ library weekday_selector_formfield;
 import 'package:flutter/material.dart';
 
 class WeekDaySelectorFormField extends StatefulWidget {
-  const WeekDaySelectorFormField({Key key,
-    this.autovalidate = false,
-    this.enabled = true,
-    this.onChange,
-    this.onSaved,
-    this.validator,
-    this.displayDays = const [
-      days.monday,
-      days.tuesday,
-      days.wednesday,
-      days.thursday,
-      days.friday,
-      days.saturday,
-      days.sunday
-    ],
-    this.language = lang.en,
-    this.selectedFillColor,
-    this.fillColor,
-    this.highlightColor,
-    this.splashColor,
-    this.borderSide = const BorderSide(color: Colors.black, width: 1),
-    this.initialValue,
-    this.textStyle = const TextStyle(color: Colors.black),
-    this.errorTextStyle = const TextStyle(color: Colors.red),
-    this.axis = Axis.horizontal,
-    this.crossAxisAlignment = WrapCrossAlignment.center,
-    this.alignment = WrapAlignment.start,
-    this.borderRadius = 8,
-    this.elevation = 4.0,
-    this.spacing = 5,
-    this.runSpacing = 5,
-    this.dayLong = 3,
-    this.singleDay = false,
-    this.boxConstraints = const BoxConstraints(
-        minWidth: 40, minHeight: 40, maxWidth: 40, maxHeight: 40)})
+  const WeekDaySelectorFormField(
+      {Key key,
+      this.autovalidate = false,
+      this.enabled = true,
+      this.onChange,
+      this.onSaved,
+      this.validator,
+      this.displayDays = const [
+        days.monday,
+        days.tuesday,
+        days.wednesday,
+        days.thursday,
+        days.friday,
+        days.saturday,
+        days.sunday
+      ],
+      this.language = lang.en,
+      this.selectedFillColor,
+      this.fillColor,
+      this.highlightColor,
+      this.splashColor,
+      this.borderSide = const BorderSide(color: Colors.black, width: 1),
+      this.initialValue,
+      this.textStyle = const TextStyle(color: Colors.black),
+      this.errorTextStyle = const TextStyle(color: Colors.red),
+      this.axis = Axis.horizontal,
+      this.crossAxisAlignment = WrapCrossAlignment.center,
+      this.alignment = WrapAlignment.start,
+      this.borderRadius = 8,
+      this.elevation = 4.0,
+      this.spacing = 5,
+      this.runSpacing = 5,
+      this.dayLong = 3,
+      this.singleDay = false,
+      this.boxConstraints =
+          const BoxConstraints(minWidth: 40, minHeight: 40, maxWidth: 40, maxHeight: 40)})
       : super(key: key);
 
   final List<days> initialValue;
@@ -66,13 +67,7 @@ class WeekDaySelectorFormField extends StatefulWidget {
   final bool singleDay;
   final BoxConstraints boxConstraints;
 
-  static const workDays = [
-    days.monday,
-    days.tuesday,
-    days.wednesday,
-    days.thursday,
-    days.friday
-  ];
+  static const workDays = [days.monday, days.tuesday, days.wednesday, days.thursday, days.friday];
 
   static const weekendDays = [
     days.saturday,
@@ -80,8 +75,7 @@ class WeekDaySelectorFormField extends StatefulWidget {
   ];
 
   @override
-  _WeekDaySelectorFormFieldState createState() =>
-      _WeekDaySelectorFormFieldState();
+  _WeekDaySelectorFormFieldState createState() => _WeekDaySelectorFormFieldState();
 }
 
 class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
@@ -91,8 +85,7 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
   @override
   void initState() {
     super.initState();
-    if (this.widget.initialValue != null)
-      daysSelected = this.widget.initialValue;
+    if (this.widget.initialValue != null) daysSelected = this.widget.initialValue;
 
     // create all DisplayDays
     this.widget.displayDays.forEach((day) {
@@ -112,19 +105,21 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
         boxConstraints: widget.boxConstraints,
         selected: widget.initialValue == null
             ? false
-            : widget.initialValue
-            .firstWhere((d) => day == d, orElse: () => null) ==
-            null
-            ? false
-            : true,
+            : widget.initialValue.firstWhere((d) => day == d, orElse: () => null) == null
+                ? false
+                : true,
       ));
     });
   }
 
   _dayTap(days day) {
     if (this.widget.singleDay) {
-      daysSelected.clear();
-      daysSelected.add(day);
+      if (!daysSelected.contains(day)) {
+        daysSelected.clear();
+        daysSelected.add(day);
+      } else {
+        daysSelected.remove(day);
+      }
       if (widget.onChange != null) {
         widget.onChange(daysSelected);
       }
@@ -145,13 +140,7 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
             elevation: this.widget.elevation,
             dayLong: this.widget.dayLong,
             boxConstraints: widget.boxConstraints,
-            selected: widget.initialValue == null
-                ? false
-                : widget.initialValue
-                .firstWhere((d) => day == d, orElse: () => null) ==
-                null
-                ? false
-                : true,
+            selected: daysSelected.contains(day),
           ));
         });
       });
@@ -188,8 +177,8 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
           children: <Widget>[
             Container(
               child: Wrap(
-                textDirection: (this.widget.language == lang.ar) ? TextDirection.rtl : TextDirection
-                    .ltr,
+                textDirection:
+                    (this.widget.language == lang.ar) ? TextDirection.rtl : TextDirection.ltr,
                 children: displayedDays,
                 alignment: widget.alignment,
                 direction: widget.axis,
@@ -198,9 +187,7 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
                 runSpacing: widget.runSpacing,
               ),
             ),
-            state.hasError
-                ? Text(state.errorText, style: this.widget.errorTextStyle)
-                : Container()
+            state.hasError ? Text(state.errorText, style: this.widget.errorTextStyle) : Container()
           ],
         );
       },
@@ -209,23 +196,24 @@ class _WeekDaySelectorFormFieldState extends State<WeekDaySelectorFormField> {
 }
 
 class _DayItem extends StatefulWidget {
-  _DayItem({Key key,
-    this.fillColor,
-    this.selectedFillColor = Colors.red,
-    this.label,
-    this.onTap,
-    this.value,
-    this.textStyle,
-    this.borderSide,
-    this.highlightColor,
-    this.splashColor,
-    this.selected = false,
-    this.borderRadius,
-    this.elevation,
-    this.dayLong,
-    this.boxConstraints})
+  _DayItem(
+      {Key key,
+      this.fillColor,
+      this.selectedFillColor = Colors.red,
+      this.label,
+      this.onTap,
+      this.value,
+      this.textStyle,
+      this.borderSide,
+      this.highlightColor,
+      this.splashColor,
+      this.selected,
+      this.borderRadius,
+      this.elevation,
+      this.dayLong,
+      this.boxConstraints})
       : super(key: key);
-  final selected;
+  final bool selected;
   final Color fillColor;
   final Color selectedFillColor;
   final Function(days) onTap;
@@ -247,14 +235,10 @@ class __DayItemState extends State<_DayItem> {
   bool selected;
 
   @override
-  void initState() {
-    selected = this.widget.selected;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    selected = this.widget.selected;
     final ButtonThemeData buttonTheme = ButtonTheme.of(context);
+    //print(selected);
     return Container(
       constraints: this.widget.boxConstraints,
       child: RawMaterialButton(
@@ -262,9 +246,9 @@ class __DayItemState extends State<_DayItem> {
             if (widget.onTap != null) {
               widget.onTap(widget.value);
             }
-            setState(() {
+            /*setState(() {
               selected = !selected;
-            });
+            });*/
           },
           focusColor: widget.selectedFillColor,
           highlightColor: Colors.yellow,
@@ -273,19 +257,15 @@ class __DayItemState extends State<_DayItem> {
           fillColor: selected == true
               ? widget.selectedFillColor ?? buttonTheme.colorScheme.background
               : widget.fillColor ?? buttonTheme.colorScheme.background,
-          textStyle: widget.textStyle ??
-              Theme
-                  .of(context)
-                  .textTheme
-                  .button,
+          textStyle: widget.textStyle ?? Theme.of(context).textTheme.button,
           //if not textstyle sended, textTheme.button by default
           child: Container(
               alignment: Alignment.center,
               child: Text(widget.dayLong == null || widget.dayLong == 0
                   ? widget.label.substring(0, 2)
                   : widget.dayLong < widget.label.length
-                  ? widget.label.substring(0, widget.dayLong)
-                  : widget.label)),
+                      ? widget.label.substring(0, widget.dayLong)
+                      : widget.label)),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
               side: selected ? widget.borderSide : BorderSide.none)),
