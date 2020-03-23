@@ -278,7 +278,7 @@ enum lang { en, es, pt, ar }
 
 const languages = [
   {lang.en: 'Monday', lang.es: 'Lunes', lang.pt: 'Segunda', lang.ar: 'اثنين'}, // monday
-  {lang.en: 'Tuesday', lang.es: 'Martes', lang.pt: 'Terça', lang.ar: 'ثلاثاء'}, // tuesday
+  {lang.en: 'Tuesday', lang.es: 'Martes', lang.pt: 'Terça', lang.ar: 'ثلاث'}, // tuesday
   {lang.en: 'Wednesday ', lang.es: 'Miercoles', lang.pt: 'Quarta', lang.ar: 'اربع'}, // wednesday
   {lang.en: 'Thursday', lang.es: 'Jueves', lang.pt: 'Quinta', lang.ar: 'خميس'}, // thursday
   {lang.en: 'Friday', lang.es: 'Viernes', lang.pt: 'Sexta', lang.ar: 'جمعة'}, // friday
